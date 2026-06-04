@@ -1,0 +1,22 @@
+2154. Keep Multiplying Found Values by Two
+
+
+int findFinalValue(int* nums, int numsSize, int original)
+ {
+    int memo[1001] = {0};
+
+    for (int i = 0; i < numsSize; i++) 
+    {
+        if (nums[i] <= 1000)
+            memo[nums[i]] = 1;
+    }
+
+    int x = original;
+    while (x <= 1000) 
+    {
+        if (memo[x]) x *= 2;
+        else break;
+    }
+
+    return x;
+}

@@ -1,0 +1,15 @@
+3190. Find Minimum Operations to Make All Elements Divisible by Three
+
+int minimumOperations(int* nums, int numsSize) 
+{
+    int count=0;
+    for(int i=0;i<numsSize;i++)
+    {
+     if((nums[i]+1)%3==0 || (nums[i]-1)%3==0)
+     {
+        count++;
+     }
+
+    }
+    return count;
+}

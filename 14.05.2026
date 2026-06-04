@@ -1,0 +1,33 @@
+bool isGood(int* nums, int numsSize) 
+{
+    int n=0;
+    for(int i=0;i< numsSize;i++)
+    {
+        if(nums[i]>n)
+        {
+            n= nums[i];
+        }
+    }
+    if(numsSize != n+1)
+    {
+        return false;
+    }
+    int freq[101]={0};
+    for(int i=0;i<numsSize;i++)
+    {
+       freq[nums[i]]++;
+    }
+    for(int i=1;i<n;i++)
+    {
+        if(freq[i]!=1)
+        {
+            return false;
+        }
+    }
+    if(freq[n]!=2)
+    {
+        return false;
+    }
+    return true;
+    
+}

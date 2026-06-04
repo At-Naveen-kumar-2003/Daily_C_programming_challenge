@@ -1,0 +1,40 @@
+#include <string.h>
+#include <stdbool.h>
+
+int minDeletionSize(char** strs, int strsSize) 
+{
+    int rows = strsSize;
+    int cols = strlen(strs[0]);
+    int deletions = 0;
+    bool sorted[100] = {false};
+
+    for (int col = 0; col < cols; col++) 
+    {
+        bool deleteColumn = false;
+
+        for (int i = 0; i < rows - 1; i++) 
+        {
+            if (!sorted[i] && strs[i][col] > strs[i + 1][col]) 
+            {
+                deleteColumn = true;
+                break;
+            }
+        }
+
+        if (deleteColumn) 
+        {
+            deletions++;
+            continue;
+        }
+
+        for (int i = 0; i < rows - 1; i++) 
+        {
+            if (!sorted[i] && strs[i][col] < strs[i + 1][col]) 
+            {
+                sorted[i] = true;
+            }
+        }
+    }
+
+    return deletions;
+}
