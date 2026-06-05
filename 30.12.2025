@@ -1,0 +1,50 @@
+#include <stdbool.h>
+
+bool isMagic(int grid[3][3]) {
+    int used[10] = {0};
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            int val = grid[i][j];
+            if (val < 1 || val > 9 || used[val])
+                return false;
+            used[val] = 1;
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        if (grid[i][0] + grid[i][1] + grid[i][2] != 15)
+            return false;
+        if (grid[0][i] + grid[1][i] + grid[2][i] != 15)
+            return false;
+    }
+
+    if (grid[0][0] + grid[1][1] + grid[2][2] != 15)
+        return false;
+    if (grid[0][2] + grid[1][1] + grid[2][0] != 15)
+        return false;
+
+    return true;
+}
+
+int numMagicSquaresInside(int** grid, int gridSize, int* gridColSize) {
+    int count = 0;
+
+    for (int i = 0; i + 2 < gridSize; i++) {
+        for (int j = 0; j + 2 < gridColSize[0]; j++) {
+
+            if (grid[i + 1][j + 1] != 5)
+                continue;
+
+            int sub[3][3];
+            for (int x = 0; x < 3; x++)
+                for (int y = 0; y < 3; y++)
+                    sub[x][y] = grid[i + x][j + y];
+
+            if (isMagic(sub))
+                count++;
+        }
+    }
+
+    return count;
+}

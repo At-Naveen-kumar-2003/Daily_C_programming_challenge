@@ -1,0 +1,49 @@
+757. Set Intersection Size At Least Two
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int cmp(const void* a, const void* b) 
+{
+    int* x = *(int**)a;
+    int* y = *(int**)b;
+    if (x[1] != y[1]) return x[1] - y[1];
+    return y[0] - x[0];
+}
+
+int intersectionSizeTwo(int** intervals, int intervalsSize, int* intervalsColSize)
+ {
+    qsort(intervals, intervalsSize, sizeof(int*), cmp);
+
+    int ans = 0;
+    int a = -1, b = -1;  // a < b
+
+    for (int i = 0; i < intervalsSize; i++) {
+        int L = intervals[i][0];
+        int R = intervals[i][1];
+
+        int count = 0;
+
+        if (a >= L && a <= R) count++;
+        if (b >= L && b <= R) count++;
+
+        if (count == 2) 
+        {
+            continue;
+        }
+        else if (count == 1) 
+        {
+            ans++;
+            a = b;
+            b = R;
+        }
+        else 
+        {
+            ans += 2;
+            a = R - 1;
+            b = R;
+        }
+    }
+
+    return ans;
+}

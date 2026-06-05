@@ -1,0 +1,19 @@
+int bestClosingTime(char* customers) 
+{
+    int result,penality,min,i;
+    for(penality=0,i=0;customers[i]!='\0';i++)
+    {
+        penality+=(customers[i]=='N'?1:0);
+    }
+    for(min=penality,result=i--;i>=0;i--)
+    {
+        penality+=(customers[i]=='Y'?1:-1);
+        if(penality<=min)
+        {
+            result=i;
+            min=penality;
+        }
+    }
+
+    return result;
+}

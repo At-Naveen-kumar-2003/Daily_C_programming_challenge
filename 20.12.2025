@@ -1,0 +1,22 @@
+Delete Columns to Make Sorted
+
+#include <string.h>
+
+int minDeletionSize(char** strs, int strsSize) 
+{
+    int count = 0;
+    int cols = strlen(strs[0]);  
+
+    for (int c = 0; c < cols; c++) 
+    {
+        for (int r = 0; r < strsSize - 1; r++) 
+        {
+            if (strs[r][c] > strs[r + 1][c]) 
+            {
+                count++;
+                break;   
+            }
+        }
+    }
+    return count;
+}
